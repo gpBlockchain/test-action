@@ -15,7 +15,7 @@ jobs:
     steps:
       - id: setup
         run: |
-          if ! [[ -z "${{ secrets.GH_PAT }}" ]]; then
+          if ! [[ -z "${{ secrets.GH_PAT.GH_PAT }}" ]]; then
              echo "has token "
              echo ::set-output has_token=true
           else
