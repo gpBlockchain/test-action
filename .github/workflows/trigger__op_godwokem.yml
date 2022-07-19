@@ -38,7 +38,7 @@ jobs:
         id: runtest
         run: |
           npm install
-          npm run test:gw_alphanet_v1
+          npm run test:gwAlphanetTestnetV1
           
       - name: Publish reports
         if: always()
