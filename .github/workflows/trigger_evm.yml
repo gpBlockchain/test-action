@@ -13,7 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - id: setup
+        run: |
+          if ! [[ -z "${{ secrets.GH_PAT }}" ]]; then
+             echo "has token "
+             echo ::set-output has_token=true
+          else
+             echo "no token "
+             echo ::set-output has_token=false
+          fi
+          
       - uses: actions/checkout@v3
+        if: steps.setup.outputs.has_token == 'true'
         with:
           repository: cryptape/evm-testing
           ssh-key: ${{ secrets.GH_PAT }}
