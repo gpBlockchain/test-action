@@ -17,8 +17,7 @@ on:
   - cron:  '50 */20 * * *' # every 6 hour
 
 jobs:
-
-contract-tests:
+  contract-tests:
     strategy:
       fail-fast: false
       matrix:
