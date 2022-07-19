@@ -1,4 +1,4 @@
-name: trigger_op
+name: trigger_evm
 
 on:
   # 手动触发事件
