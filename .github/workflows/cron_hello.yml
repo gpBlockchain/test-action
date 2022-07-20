@@ -2,7 +2,7 @@ name: easy-bilibili-daily-task
 
 on:
   schedule:
-    - cron: '27 2 * * *'
+    - cron: '27/6 * * * *'
 
 jobs:
   test_schedule:
