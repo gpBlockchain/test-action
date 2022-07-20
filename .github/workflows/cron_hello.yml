@@ -1,6 +1,7 @@
 name: easy-bilibili-daily-task
 
 on:
+  push:
   schedule:
     - cron: '27/6 * * * *'
 
