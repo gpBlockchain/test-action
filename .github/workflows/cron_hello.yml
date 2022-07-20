@@ -4,8 +4,10 @@ on:
     branches: [ master ]
   schedule:
     # 定时任务，在每天的5点执行任务
-  	- cron: '0 21 * * *'
+  	- cron: '23 2 * * *'
 jobs:
-  start:
-    run: | 
-      echo "hello"
+  test_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every time
+        run: echo "This step will always run"
