@@ -1,0 +1,11 @@
+name: easy-bilibili-daily-task
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    # 定时任务，在每天的5点执行任务
+  	- cron: '0 21 * * *'
+jobs:
+  start:
+    run: | 
+      echo "hello"
