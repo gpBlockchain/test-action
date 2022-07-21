@@ -8,8 +8,6 @@ jobs:
   contract-tests:
     strategy:
       fail-fast: false
-      matrix:
-        net: ['testnet_v1']
     runs-on: ubuntu-latest
 
     steps:
