@@ -1,0 +1,412 @@
+name: trigger_gw_alphanet_openzeppelin_contract_test
+
+
+on:
+  workflow_dispatch:
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: godwoken-com
+          repository: gpBlockchain/openzeppelin-contracts
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Node Cache
+        uses: actions/cache@v2
+        id: npm-and-yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ~/.npm
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('/home/runner/work/**/package-lock.json', '/home/runner/work/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+            
+      - name: Run init 
+        id: runtest
+        run: |
+          npm install
+          npm run test:init
+      - name: Run AccessControl 
+        if: success() || failure()
+        run: |
+          npm run test:AccessControl 
+      - name: Run AccessControlEnum 
+        if: success() || failure()
+        run: |
+          npm run test:AccessControlEnum 
+      - name: Run Ownable 
+        if: success() || failure()
+        run: |
+          npm run test:Ownable 
+      - name: Run CrossChainEnabled 
+        if: success() || failure()
+        run: |
+          npm run test:CrossChainEnabled 
+      - name: Run PaymentSplitter 
+        if: success() || failure()
+        run: |
+          npm run test:PaymentSplitter 
+      - name: Run VestingWallet 
+        if: success() || failure()
+        run: |
+          npm run test:VestingWallet 
+      - name: Run GovernorCompatibilityBravo 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorCompatibilityBravo 
+      - name: Run GovernorComp 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorComp 
+      - name: Run GovernorERC721Mock 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorERC721Mock 
+      - name: Run GovernorPreventLateQuorum 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorPreventLateQuorum 
+      - name: Run GovernorTimelockCompound 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorTimelockCompound 
+      - name: Run GovernorTimelockControl 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorTimelockControl 
+      - name: Run GovernorVotesQuorumFraction 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorVotesQuorumFraction 
+      - name: Run GovernorWithParams 
+        if: success() || failure()
+        run: |
+          npm run test:GovernorWithParams 
+      - name: Run Governor 
+        if: success() || failure()
+        run: |
+          npm run test:Governor 
+      - name: Run TimelockController 
+        if: success() || failure()
+        run: |
+          npm run test:TimelockController 
+      - name: Run Votes 
+        if: success() || failure()
+        run: |
+          npm run test:Votes 
+      - name: Run ERC2771Context 
+        if: success() || failure()
+        run: |
+          npm run test:ERC2771Context 
+      - name: Run MinimalForwarder 
+        if: success() || failure()
+        run: |
+          npm run test:MinimalForwarder 
+      - name: Run BeaconProxy 
+        if: success() || failure()
+        run: |
+          npm run test:BeaconProxy 
+      - name: Run UpgradeableBeacon 
+        if: success() || failure()
+        run: |
+          npm run test:UpgradeableBeacon 
+      - name: Run Clones 
+        if: success() || failure()
+        run: |
+          npm run test:Clones 
+      - name: Run ERC1967Proxy 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1967Proxy 
+      - name: Run ProxyAdmin 
+        if: success() || failure()
+        run: |
+          npm run test:ProxyAdmin 
+      - name: Run TransparentUpgradeableProxy 
+        if: success() || failure()
+        run: |
+          npm run test:TransparentUpgradeableProxy 
+      - name: Run Initializable 
+        if: success() || failure()
+        run: |
+          npm run test:Initializable 
+      - name: Run UUPSUpgradeable 
+        if: success() || failure()
+        run: |
+          npm run test:UUPSUpgradeable 
+      - name: Run Pausable 
+        if: success() || failure()
+        run: |
+          npm run test:Pausable 
+      - name: Run PullPayment 
+        if: success() || failure()
+        run: |
+          npm run test:PullPayment 
+      - name: Run ReentrancyGuard 
+        if: success() || failure()
+        run: |
+          npm run test:ReentrancyGuard 
+      - name: Run ERC1155 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155 
+      - name: Run ERC1155Burnable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155Burnable 
+      - name: Run ERC1155Pausable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155Pausable 
+      - name: Run ERC1155Supply 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155Supply 
+      - name: Run ERC1155URIStorage 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155URIStorage 
+      - name: Run ERC1155PresetMinterPauser 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155PresetMinterPauser 
+      - name: Run ERC1155Holder 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1155Holder 
+      - name: Run ERC20Test 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Test 
+      - name: Run ERC20Permit 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Permit 
+      - name: Run ERC20Burnable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Burnable 
+      - name: Run ERC20Capped 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Capped 
+      - name: Run ERC20FlashMint 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20FlashMint 
+      - name: Run ERC20Pausable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Pausable 
+      - name: Run ERC20Snapshot 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Snapshot 
+      - name: Run ERC20Votes 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Votes 
+      - name: Run ERC20VotesComp 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20VotesComp 
+      - name: Run ERC20Wrapper 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20Wrapper 
+      - name: Run ERC20PresetFixedSupply 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20PresetFixedSupply 
+      - name: Run ERC20PresetMinterPauser 
+        if: success() || failure()
+        run: |
+          npm run test:ERC20PresetMinterPauser 
+      - name: Run SafeERC20 
+        if: success() || failure()
+        run: |
+          npm run test:SafeERC20 
+      - name: Run TokenTimelock 
+        if: success() || failure()
+        run: |
+          npm run test:TokenTimelock 
+      - name: Run ERC721Enumerable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721Enumerable 
+      - name: Run ERC721Burnable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721Burnable 
+      - name: Run ERC721Pausable 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721Pausable 
+      - name: Run ERC721Royalty 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721Royalty 
+      - name: Run ERC721URIStorage 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721URIStorage 
+      - name: Run ERC721Votes 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721Votes 
+      - name: Run ERC721PresetMinterPauserAutoId 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721PresetMinterPauserAutoId 
+      - name: Run ERC721Holder 
+        if: success() || failure()
+        run: |
+          npm run test:ERC721Holder 
+      - name: Run ERC777 
+        if: success() || failure()
+        run: |
+          npm run test:ERC777 
+      - name: Run ERC777PresetFixedSupply 
+        if: success() || failure()
+        run: |
+          npm run test:ERC777PresetFixedSupply 
+      - name: Run Address 
+        if: success() || failure()
+        run: |
+          npm run test:Address 
+      - name: Run Arrays 
+        if: success() || failure()
+        run: |
+          npm run test:Arrays 
+      - name: Run Strings 
+        if: success() || failure()
+        run: |
+          npm run test:Strings 
+      - name: Run Checkpoints 
+        if: success() || failure()
+        run: |
+          npm run test:Checkpoints 
+      - name: Run Context 
+        if: success() || failure()
+        run: |
+          npm run test:Context 
+      - name: Run Counters 
+        if: success() || failure()
+        run: |
+          npm run test:Counters 
+      - name: Run Create2 
+        if: success() || failure()
+        run: |
+          npm run test:Create2 
+      - name: Run EIP712 
+        if: success() || failure()
+        run: |
+          npm run test:EIP712 
+      - name: Run ECDSA 
+        if: success() || failure()
+        run: |
+          npm run test:ECDSA 
+      - name: Run MerkleProof 
+        if: success() || failure()
+        run: |
+          npm run test:MerkleProof 
+      - name: Run SignatureChecker 
+        if: success() || failure()
+        run: |
+          npm run test:SignatureChecker 
+      - name: Run ConditionalEscrow 
+        if: success() || failure()
+        run: |
+          npm run test:ConditionalEscrow 
+      - name: Run Escrow 
+        if: success() || failure()
+        run: |
+          npm run test:Escrow 
+      - name: Run RefundEscrow 
+        if: success() || failure()
+        run: |
+          npm run test:RefundEscrow 
+      - name: Run ERC165 
+        if: success() || failure()
+        run: |
+          npm run test:ERC165 
+      - name: Run ERC165Checker 
+        if: success() || failure()
+        run: |
+          npm run test:ERC165Checker 
+      - name: Run ERC165Storage 
+        if: success() || failure()
+        run: |
+          npm run test:ERC165Storage 
+      - name: Run ERC1820Implementer 
+        if: success() || failure()
+        run: |
+          npm run test:ERC1820Implementer 
+      - name: Run Math 
+        if: success() || failure()
+        run: |
+          npm run test:Math 
+      - name: Run SafeCast 
+        if: success() || failure()
+        run: |
+          npm run test:SafeCast 
+      - name: Run SafeMath 
+        if: success() || failure()
+        run: |
+          npm run test:SafeMath 
+      - name: Run SignedMath 
+        if: success() || failure()
+        run: |
+          npm run test:SignedMath 
+      - name: Run SignedSafeMath
+        if: success() || failure()
+        run: |
+          npm run test:SignedSafeMath
+      - name: Run MulticallToken 
+        if: success() || failure()
+        run: |
+          npm run test:MulticallToken 
+      - name: Run StorageSlot 
+        if: success() || failure()
+        run: |
+          npm run test:StorageSlot 
+      - name: Run BitMap 
+        if: success() || failure()
+        run: |
+          npm run test:BitMap 
+      - name: Run DoubleEndedQueue 
+        if: success() || failure()
+        run: |
+          npm run test:DoubleEndedQueue 
+      - name: Run EnumerableMap 
+        if: success() || failure()
+        run: |
+          npm run test:EnumerableMap 
+      - name: Run EnumerableSet 
+        if: success() || failure()
+        run: |
+          npm run test:EnumerableSet 
+      - name: Run TimersBlockNumber 
+        if: success() || failure()
+        run: |
+          npm run test:TimersBlockNumber 
+      - name: Run TimersTimestamp
+        if: success() || failure()
+        run: |
+          npm run test:TimersTimestamp
+
+      - name: Publish reports
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: jfoa-build-reports-${{ runner.os }}
+          path: mochawesome-report/
