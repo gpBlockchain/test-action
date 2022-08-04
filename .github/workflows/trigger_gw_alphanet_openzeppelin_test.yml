@@ -35,14 +35,14 @@ jobs:
         run: |
           npm install
           npm run test:init
-      - name: Run Pipeline 5-1
-        if: success() || failure()
-        run: |
-          npm run test:pipeline5-1
       - name: Run Pipeline 5-2
         if: success() || failure()
         run: |
           npm run test:pipeline5-2
+      - name: Run Pipeline 5-1
+        if: success() || failure()
+        run: |
+          npm run test:pipeline5-1
       - name: Run Pipeline 5-3
         if: success() || failure()
         run: |
