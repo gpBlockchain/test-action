@@ -40,8 +40,8 @@ jobs:
     needs: contractTestsInit
     runs-on: ubuntu-latest
     steps:
-      - name: run 52
-        id: run 52
+      - name: run52
+        id: run52
         run: |
           cd /home/runner/work/test-action/test-action/
           npm run test:pipeline5-2
