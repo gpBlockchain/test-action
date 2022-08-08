@@ -37,18 +37,20 @@ jobs:
           npm run test:init
           
   Run-Pipeline-5-2:
-    needs:contract-tests-init
+    needs: contract-tests-init
     runs-on: ubuntu-latest
-      steps:
-        - name:run 5-2
-          id: run 5-2
-          run: |
-            cd /home/runner/work/test-action/test-action/
-            npm run test:pipeline5-2
-  Publish-reports
-    needs:contract-tests-init  
+    steps:
+      - name: run 5-2
+        id: run 5-2
+        run: |
+          cd /home/runner/work/test-action/test-action/
+          npm run test:pipeline5-2
+          
+  Publish-reports:
+    needs: contract-tests-init  
     runs-on: ubuntu-latest
-        uses: actions/upload-artifact@v2
+    steps:
+      - uses: actions/upload-artifact@v2
         with:
           name: jfoa-build-reports-${{ runner.os }}
           path: mochawesome-report/
