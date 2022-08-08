@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  contract_tests_init:
-    name: contract_tests_init
+  contractTestsInit:
+    name: contractTestsInit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -37,17 +37,17 @@ jobs:
           npm run test:init
           
   RunPipeline52:
-    needs: contract_tests_init
+    needs: contractTestsInit
     runs-on: ubuntu-latest
     steps:
-      - name: run 5-2
-        id: run 5-2
+      - name: run 52
+        id: run 52
         run: |
           cd /home/runner/work/test-action/test-action/
           npm run test:pipeline5-2
           
   PublishReports:
-    needs: contract_tests_init  
+    needs: contractTestsInit  
     runs-on: ubuntu-latest
     steps:
       - uses: actions/upload-artifact@v2
