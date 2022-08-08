@@ -9,6 +9,7 @@ jobs:
     name: contractTestsInit
     runs-on: ubuntu-latest
     container:
+      image: node:14.16    
       volumes:
         - /workspace:/github/workspace    
     steps:
@@ -43,6 +44,7 @@ jobs:
     needs: contractTestsInit
     runs-on: ubuntu-latest
     container:
+      image: node:14.16        
       volumes:
         - /workspace:/github/workspace    
     steps:
@@ -56,6 +58,7 @@ jobs:
     needs: contractTestsInit  
     runs-on: ubuntu-latest
     container:
+      image: node:14.16    
       volumes:
         - /workspace:/github/workspace   
     steps:
