@@ -33,7 +33,7 @@ jobs:
       - name: Add Log 
         id: log
         run: |
-          npm postinstall
+          npm run postinstall
       - name: Run Prepare Account
         id: runtest
         run: |
