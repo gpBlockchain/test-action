@@ -33,11 +33,11 @@ jobs:
       - name: Add Log 
         id: log
         run: |
+          npm install
           npm run postinstall
       - name: Run Prepare Account
         id: runtest
         run: |
-          npm install
           bash try.sh npm run test:init
       - name: Run Pipeline 5-2
         if: success() || failure()
