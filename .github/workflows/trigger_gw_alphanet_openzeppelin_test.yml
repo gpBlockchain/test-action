@@ -30,6 +30,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
+      - name: Add Log 
+        id: log
+        run: |
+          npm postinstall
       - name: Run Prepare Account
         id: runtest
         run: |
