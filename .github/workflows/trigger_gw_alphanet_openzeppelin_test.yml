@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: compatibility-godwoken
+          ref: add-log
           repository: gpBlockchain/openzeppelin-contracts
       - uses: actions/setup-node@v3
         with:
