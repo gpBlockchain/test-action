@@ -29,7 +29,10 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('/home/runner/work/**/package-lock.json', '/home/runner/work/**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-
+      - name: Add Log 
+        id: log
+        run: |
+          npm install
       - name: Run Prepare Account
         id: runtest
         run: |
