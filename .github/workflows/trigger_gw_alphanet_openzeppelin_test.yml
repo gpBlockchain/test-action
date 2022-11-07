@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: add-log
+          ref: gw-node
           repository: gpBlockchain/openzeppelin-contracts
       - uses: actions/setup-node@v3
         with:
@@ -30,11 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
-      - name: Add Log 
-        id: log
-        run: |
-          npm install
-          npm run postinstall
       - name: Run Prepare Account
         id: runtest
         run: |
