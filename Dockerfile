@@ -19,4 +19,4 @@ RUN apt-get -y install ca-certificates
 COPY --from=builder /build/axon/target/release/axon /app/axon
 COPY --from=builder /build/axon/devtools /app/devtools
 
-CMD ./axon -c=/app/devtools/chain/config.toml -g=/app/devtools/chain/genesis.json
+CMD ./axon -c=/app/devtools/chain/config.toml -g=/app/devtools/chain/genesis_single_node.json
