@@ -13,12 +13,15 @@ jobs:
         with:
           ref: main
           repository: gpBlockchain/nexus-e2e
+          path: nexus-e2e
 
       - uses: actions/checkout@v3
         with:
           ref: main
           repository: ckb-js/nexus
           submodules: recursive
+          path: nexus
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
