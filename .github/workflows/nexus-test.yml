@@ -1,0 +1,43 @@
+
+https://github.com/gpBlockchain/nexus-e2e.git
+name: nexus test 
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+          repository: gpBlockchain/nexus-e2e
+
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+          repository: ckb-js/nexus
+          submodules: recursive
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: restore dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: cat msg 
+        run: pwd
+        
+      - name: Install project dependencies and build
+        run: npm install
+
+      - name: Build packages
+        run: |
+          npm run build
+
+#       - name: cp build 
+
