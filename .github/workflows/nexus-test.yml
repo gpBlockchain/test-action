@@ -37,6 +37,3 @@ jobs:
       - name: Build packages
         run: |
           npm run build
-
-#       - name: cp build 
-
