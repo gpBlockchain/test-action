@@ -76,7 +76,7 @@ jobs:
         id: package
         if: success() || failure()
         run: |
-          tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/allure-results.tar.gz  /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e/report
+          tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/allure-results.tar.gz  /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e/allure-results
 
       - name: Publish e2e test report and nexus build 
         if: success() || failure()
