@@ -36,6 +36,8 @@ jobs:
         run: |
           pwd
           tree -L 2
+      - name: cd nexus 
+        run: cd nexus
         
       - name: Install project dependencies and build
         run: npm install
@@ -44,5 +46,20 @@ jobs:
         run: |
           npm run build
 
-#       - name: cp build 
-
+      - name: cd nexus-e2e
+        run: cd  ../nexus-e2e
+        
+      - name: start nexus web web
+        id: startWeb
+        run: |
+          cd packages/nexus-web
+          npm i
+          npm run start > node.log 2>&1 &
+          cd ../../
+      - name: test
+        id: test
+        run: |
+          cd packages/e2e
+          npm i
+#          xvfb-run --auto-servernum npm run test
+#          cd ../../        
