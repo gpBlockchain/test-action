@@ -47,8 +47,7 @@ jobs:
           cd /home/runner/work/test-action/test-action/nexus 
           npm run build
           cd packages/extension-chrome
-          npm run build
-        
+          npm run build        
       - name: start nexus web web
         id: startWeb
         run: |
@@ -80,3 +79,4 @@ jobs:
         with:
           name: jfoa-build-reports-${{ runner.os }}
           path: /home/runner/work/test-action/test-action/reportAndNexus
+
