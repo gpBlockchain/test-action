@@ -1,4 +1,3 @@
-
 name: nexus test 
 
 on: 
@@ -67,6 +66,7 @@ jobs:
 
       - name: cp nexus file to update file 
         if: success() || failure()
+        run: |	  	        
           tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/build.tar.gz /home/runner/work/test-action/test-action/nexus/packages/extension-chrome/build
           
       - name: package report
