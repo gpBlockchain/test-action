@@ -44,9 +44,8 @@ jobs:
       - name: Build packages
         run: |
           cd /home/runner/work/test-action/test-action/nexus 
-          npm run build
-          cd packages/extension-chrome
-          npm run build        
+          npm run build -w @nexus-wallet/types -w @nexus-wallet/utils
+          npm run build -w @nexus-wallet/extension-chrome
       - name: start nexus web web
         id: startWeb
         run: |
