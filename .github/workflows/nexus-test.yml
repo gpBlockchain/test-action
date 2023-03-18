@@ -46,7 +46,8 @@ jobs:
         run: |
           cd /home/runner/work/test-action/test-action/nexus 
           npm run build
-
+          cd packages/extension-chrome
+          npm run build
         
       - name: start nexus web web
         id: startWeb
@@ -61,3 +62,24 @@ jobs:
           npm i
 #          xvfb-run --auto-servernum npm run test
 #          cd ../../        
+	    
+      - name: make update file  dir
+        if: success() || failure()
+        run: |	  	
+          mkdir /home/runner/work/test-action/test-action/reportAndNexus
+
+      - name: cp nexus file to update file 
+        if: success() || failure()
+          tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/build.tar.gz /home/runner/work/test-action/test-action/nexus/packages/extension-chrome/build
+      - name: package report
+        id: package
+        if: success() || failure()
+        run: |
+          tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/allure-results.tar.gz  /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e/report
+
+      - name: Publish e2e test report and nexus build 
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: jfoa-build-reports-${{ runner.os }}
+          path: /home/runner/work/test-action/test-action/reportAndNexus
