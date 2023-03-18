@@ -58,7 +58,8 @@ jobs:
         run: |
           cd /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e
           npm i
-          
+          xvfb-run --auto-servernum npm run test
+
       - name: make update file  dir
         if: success() || failure()
         run: |	  	
