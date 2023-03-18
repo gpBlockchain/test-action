@@ -59,6 +59,7 @@ jobs:
         run: |
           cd /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e
           npm i
+          
       - name: make update file  dir
         if: success() || failure()
         run: |	  	
@@ -67,6 +68,7 @@ jobs:
       - name: cp nexus file to update file 
         if: success() || failure()
           tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/build.tar.gz /home/runner/work/test-action/test-action/nexus/packages/extension-chrome/build
+          
       - name: package report
         id: package
         if: success() || failure()
