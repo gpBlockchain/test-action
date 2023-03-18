@@ -9,15 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           ref: main
           repository: gpBlockchain/nexus-e2e
+          path: nexus-e2e
 
       - uses: actions/checkout@v3
         with:
           ref: main
           repository: ckb-js/nexus
           submodules: recursive
+          path: nexus
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -29,11 +33,50 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: cat msg 
-        run: pwd
+        run: |
+          pwd
+          tree -L 2
         
       - name: Install project dependencies and build
-        run: npm install
+        run: |
+          cd /home/runner/work/test-action/test-action/nexus 
+          npm install
 
       - name: Build packages
         run: |
+          cd /home/runner/work/test-action/test-action/nexus 
           npm run build
+          cd packages/extension-chrome
+          npm run build        
+      - name: start nexus web web
+        id: startWeb
+        run: |
+          cd /home/runner/work/test-action/test-action/nexus-e2e/packages/nexus-web
+          npm i
+          npm run start > node.log 2>&1 &
+      - name: test
+        id: test
+        run: |
+          cd /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e
+          npm i
+      - name: make update file  dir
+        if: success() || failure()
+        run: |	  	
+          mkdir /home/runner/work/test-action/test-action/reportAndNexus
+
+      - name: cp nexus file to update file 
+        if: success() || failure()
+          tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/build.tar.gz /home/runner/work/test-action/test-action/nexus/packages/extension-chrome/build
+      - name: package report
+        id: package
+        if: success() || failure()
+        run: |
+          tar -zcvf /home/runner/work/test-action/test-action/reportAndNexus/allure-results.tar.gz  /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e/report
+
+      - name: Publish e2e test report and nexus build 
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: jfoa-build-reports-${{ runner.os }}
+          path: /home/runner/work/test-action/test-action/reportAndNexus
+
