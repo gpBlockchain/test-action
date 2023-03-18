@@ -29,7 +29,9 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: cat msg 
-        run: pwd
+        run: |
+          pwd
+          tree -L 2
         
       - name: Install project dependencies and build
         run: npm install
