@@ -49,12 +49,14 @@ jobs:
           npm run build -w @nexus-wallet/extension-chrome
       - name: start nexus web web
         id: startWeb
+        if: success() || failure()        
         run: |
           cd /home/runner/work/test-action/test-action/nexus-e2e/packages/nexus-web
           npm i
           npm run start > node.log 2>&1 &
       - name: test
         id: test
+        if: success() || failure()        
         run: |
           cd /home/runner/work/test-action/test-action/nexus-e2e/packages/e2e
           npm i
