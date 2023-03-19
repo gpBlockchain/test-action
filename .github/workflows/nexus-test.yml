@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
-          repository: ckb-js/nexus
+          repository: homura/nexus
           submodules: recursive
           path: nexus
 
@@ -44,9 +44,7 @@ jobs:
       - name: Build packages
         run: |
           cd /home/runner/work/test-action/test-action/nexus 
-          npm run build:lumos
-          npm run build -w @nexus-wallet/types -w @nexus-wallet/utils
-          npm run build -w @nexus-wallet/extension-chrome
+          npm run build
       - name: start nexus web web
         id: startWeb
         if: success() || failure()        
