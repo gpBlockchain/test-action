@@ -16,6 +16,7 @@ jobs:
           tar xvzf "$tarball"
           sudo cp -r litecoin-*/* /usr/local
           litecoind -testnet -daemon
+          sleep 10
           litecoin-cli -testnet createwallet ckb-auth-test-wallet
           litecoin-cli -rpcwallet=ckb-auth-test-wallet -testnet importprivkey cQoJiU5ECnVpRqfV5dWKDE2sLQq6516Tja1Hb1GABUV24n7WkqV4 ckb-auth-test-privkey false
           litecoin-cli -rpcwallet=ckb-auth-test-wallet -testnet getaddressesbylabel ckb-auth-test-privkey
