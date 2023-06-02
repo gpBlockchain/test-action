@@ -20,5 +20,6 @@ jobs:
           litecoin-cli -testnet createwallet ckb-auth-test-wallet
           litecoin-cli -rpcwallet=ckb-auth-test-wallet -testnet importprivkey cQoJiU5ECnVpRqfV5dWKDE2sLQq6516Tja1Hb1GABUV24n7WkqV4 ckb-auth-test-privkey false
           litecoin-cli -rpcwallet=ckb-auth-test-wallet -testnet getaddressesbylabel ckb-auth-test-privkey
+          sudo apt -y install base58
           base58 -d <<< mhknqLHQGWDXuLsPdzab8nA4jD3fMdVYS2 | xxd -s 1 -l 20 -p
           litecoin-cli -rpcwallet=ckb-auth-test-wallet -testnet signmessage mhknqLHQGWDXuLsPdzab8nA4jD3fMdVYS2 29553f9e37fa16e45f1d3e616ac5366f6afd9936477f2d6fc870f49bdf540157
