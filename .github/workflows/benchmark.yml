@@ -55,7 +55,6 @@ jobs:
         if: ${{ failure() }}
         run: echo "GITHUB_RUN_STATE=1" >> $GITHUB_ENV
       
-      - uses: actions/checkout@v2
       - name: Setup upterm session
         if: ${{ failure() }}
         uses: lhotari/action-upterm@v1
@@ -64,4 +63,6 @@ jobs:
         if: ${{ always() }}
         env:
           JOB_ID: "benchmark-${{ github.repository_owner }}-${{ github.ref_name }}-${{ steps.date.outputs.date }}-in-10h"
-        run: ./ckb-bench/devtools/ci/script/benchmark.sh clean
+        run: ｜
+          pwd
+          ./ckb-bench/devtools/ci/script/benchmark.sh clean
