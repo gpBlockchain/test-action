@@ -10,9 +10,6 @@ jobs:
     steps:
       - name: Highlight text in HTML
         run: |
-          echo "::set-output name=html::<p>这是一个 <span style='background-color: yellow;'>提醒</span> 的例子</p>"
-          echo "${{ steps.highlight.outputs.html }}" # 输出 HTML 到 GitHub Actions 的日志
-        id: highlight
-      - name: Print output
-        run: |
-          echo "${{ steps.highlight.outputs.html }}" # 将 HTML 输出到 GitHub Actions 的日志
+          echo ${{ secrets.TEST }} > demo.log 
+          cat demo.log
+      
