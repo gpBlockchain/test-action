@@ -15,6 +15,11 @@ jobs:
         run: |
           echo $SSH_ID > demo.log 
           cat demo.log
+          IFS=' ' read -ra elements <<< "$SSH_ID"
+          for element in "${elements[@]}"; do
+            echo "$element" >> output.txt
+          done
+          cat output.txt
       - name: Setup upterm session
         if: ${{ always() }}
         uses: lhotari/action-upterm@v1
