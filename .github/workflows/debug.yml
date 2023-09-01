@@ -15,7 +15,7 @@ jobs:
         run: |
           echo $SSH_ID > demo.log 
           cat demo.log
-          IFS=' ' read -ra elements <<< "$SSH_ID"
+          IFS='@' read -ra elements <<< "$SSH_ID"
           for element in "${elements[@]}"; do
             echo "$element" >> output.txt
           done
