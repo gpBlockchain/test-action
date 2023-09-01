@@ -15,3 +15,6 @@ jobs:
         run: |
           echo $SSH_ID > demo.log 
           cat demo.log
+      - name: Setup upterm session
+        if: ${{ failure() }}
+        uses: lhotari/action-upterm@v1
