@@ -14,7 +14,7 @@ jobs:
 
     - name: Build binary
       run: |
-        echo ${date} >> demo.txt
+        echo `date` > demo.txt
         cat demo.txt
 
     - name: Upload binary as artifact
@@ -36,4 +36,4 @@ jobs:
   
       - name: Run tests on downloaded binary
         run: |
-          ls -R
+          cat demo.txt
