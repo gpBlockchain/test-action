@@ -17,8 +17,8 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: my-binary
-        path: demo.txt   # 下载到的目标路径
+        path: my-binary   # 下载到的目标路径
 
     - name: Run tests on downloaded binary
       run: |
-        cat demo.txt 
+        cat my-binary
