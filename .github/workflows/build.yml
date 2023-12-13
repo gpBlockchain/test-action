@@ -14,7 +14,8 @@ jobs:
 
     - name: Build binary
       run: |
-        echo "demo" >> demo.txt
+        echo ${date} >> demo.txt
+        cat demo.txt
 
     - name: Upload binary as artifact
       uses: actions/upload-artifact@v2
