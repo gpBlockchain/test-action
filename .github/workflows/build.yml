@@ -36,5 +36,4 @@ jobs:
   
       - name: Run tests on downloaded binary
         run: |
-          cat my-binary
           ls -R
