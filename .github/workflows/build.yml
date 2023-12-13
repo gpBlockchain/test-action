@@ -15,14 +15,15 @@ jobs:
 
     - name: Build binary
       run: |
-        echo `date` > demo.txt
+        mkdir demo
+        echo `date` > demo/demo.txt
         cat demo.txt
 
     - name: Upload binary as artifact
       uses: actions/upload-artifact@v2
       with:
         name: my-binary
-        path: demo.txt
+        path: demo/demo1.txt
 
   test:
       runs-on: ubuntu-latest
@@ -37,4 +38,4 @@ jobs:
   
       - name: Run tests on downloaded binary
         run: |
-          cat demo.txt
+          cat demo1.txt
