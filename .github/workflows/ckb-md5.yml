@@ -36,12 +36,12 @@ jobs:
     - name: Build CKB and Package CKB
       run: |
         export GIT_TAG_NAME=` echo ${{ github.ref }} | awk -F '/' '{print $4}' `
-        docker run --rm -i -w /ckb -v $(pwd):/ckb -e OPENSSL_STATIC=1 -e OPENSSL_LIB_DIR=/usr/local/lib64 -e OPENSSL_INCLUDE_DIR=/usr/local/include $BUILDER_IMAGE make ${{ matrix.build_target }}
-        cd target/prod
-        build_md5=$(md5sum "ckb" | awk '{print $1}')
         wget https://github.com/nervosnetwork/ckb/releases/download/${CKB_VERSION}/ckb_${CKB_VERSION}_${REL_PKG}.tar.gz
         tar -zxvf ckb_${CKB_VERSION}_${REL_PKG}.tar.gz
         wget_md5=$(md5sum "ckb_${CKB_VERSION}_${REL_PKG}/ckb" | awk '{print $1}')
+        docker run --rm -i -w /ckb -v $(pwd):/ckb -e OPENSSL_STATIC=1 -e OPENSSL_LIB_DIR=/usr/local/lib64 -e OPENSSL_INCLUDE_DIR=/usr/local/include $BUILDER_IMAGE make ${{ matrix.build_target }}
+        cd target/prod
+        build_md5=$(md5sum "ckb" | awk '{print $1}')
         if [ "$build_md5" == "$wget_md5" ]; then
             echo "MD5 sums are equal."
         else
