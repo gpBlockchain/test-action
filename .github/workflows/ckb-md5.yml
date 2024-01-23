@@ -20,9 +20,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - rel_pkg: "x86_64-unknown-linux-gnu.tar.gz"
+          - rel_pkg: "x86_64-unknown-linux-gnu"
             build_target: "prod"
-          - rel_pkg: "x86_64-unknown-linux-gnu-portable.tar.gz"
+          - rel_pkg: "x86_64-unknown-linux-gnu-portable"
             build_target: "prod_portable"
     steps:
     - uses: actions/checkout@v3
@@ -39,15 +39,15 @@ jobs:
         docker run --rm -i -w /ckb -v $(pwd):/ckb -e OPENSSL_STATIC=1 -e OPENSSL_LIB_DIR=/usr/local/lib64 -e OPENSSL_INCLUDE_DIR=/usr/local/include $BUILDER_IMAGE make ${{ matrix.build_target }}
         cd target/prod
         build_md5=$(md5sum "ckb" | awk '{print $1}')
-        wget https://github.com/nervosnetwork/ckb/releases/download/${CKB_VERSION}/ckb_${CKB_VERSION}_x86_64-unknown-linux-gnu.tar.gz
-        tar -zxvf ckb_${CKB_VERSION}_x86_64-unknown-linux-gnu.tar.gz
-        wget_md5=$(md5sum "ckb_${CKB_VERSION}_x86_64-unknown-linux-gnu/ckb" | awk '{print $1}')
-        if [ "$md5sum1" == "$md5sum2" ]; then
+        wget https://github.com/nervosnetwork/ckb/releases/download/${CKB_VERSION}/ckb_${CKB_VERSION}_${REL_PKG}.tar.gz
+        tar -zxvf ckb_${CKB_VERSION}_${REL_PKG}.tar.gz
+        wget_md5=$(md5sum "ckb_${CKB_VERSION}_${REL_PKG}/ckb" | awk '{print $1}')
+        if [ "$build_md5" == "$wget_md5" ]; then
             echo "MD5 sums are equal."
         else
             echo "MD5 sums are different:"
-            echo "File 1: $md5sum1"
-            echo "File 2: $md5sum2"
+            echo "build_md5 1: $build_md5"
+            echo "wget_md5 2: $wget_md5"
             exit 1
         fi
 
