@@ -1,0 +1,41 @@
+name: Run Build req
+
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build binary
+      run: |
+        mkdir demo
+        echo `date` > demo/demo1.txt
+        cat demo/demo1.txt
+
+    - name: Upload binary as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-binary
+        path: demo/demo1.txt
+
+  test:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
+      - name: Download binary artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: my-binary
+  
+      - name: Run tests on downloaded binary
+        run: |
+          cat demo1.txt

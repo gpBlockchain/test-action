@@ -1,0 +1,23 @@
+name: Run Tests
+
+on:
+  workflow_run:
+    workflows: [build.yml]
+    types:
+      - completed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download binary artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: my-binary
+
+    - name: Run tests on downloaded binary
+      run: |
+        ls -R
