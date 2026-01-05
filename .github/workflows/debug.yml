@@ -13,9 +13,9 @@ jobs:
     steps:
       - name: Highlight text in HTML
         run: |
-          wget https://github.com/nervosnetwork/ckb/releases/download/v0.204.0/ckb_v0.204.0_aarch64-apple-darwin-portable.zip
-          unzip ckb_v0.204.0_aarch64-apple-darwin-portable.zip
-          ./ckb_v0.204.0_aarch64-apple-darwin-portable/ckb --version
+          wget https://github.com/nervosnetwork/ckb/releases/download/v0.204.0-rc2/ckb_v0.204.0-rc2_aarch64-apple-darwin-portable.zip
+          unzip ckb_v0.204.0-rc2_aarch64-apple-darwin-portable.zip
+          ./ckb_v0.204.0-rc2_aarch64-apple-darwin-portable/ckb --version
 
       # - name: Setup upterm session
       #   if: ${{ always() }}
