@@ -7,19 +7,16 @@ on:
 jobs:
   highlight:
   
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       SSH_ID: ${{ secrets.TEST }}
     steps:
       - name: Highlight text in HTML
         run: |
-          echo $SSH_ID > demo.log 
-          cat demo.log
-          IFS='@' read -ra elements <<< "$SSH_ID"
-          for element in "${elements[@]}"; do
-            echo "$element" >> output.txt
-          done
-          cat output.txt
-      - name: Setup upterm session
-        if: ${{ always() }}
-        uses: lhotari/action-upterm@v1
+          wget https://github.com/nervosnetwork/ckb/releases/download/v0.204.0/ckb_v0.204.0_aarch64-apple-darwin-portable.zip
+          unzip ckb_v0.204.0_aarch64-apple-darwin-portable.zip
+          ./ckb_v0.204.0_aarch64-apple-darwin-portable/ckb --version
+
+      # - name: Setup upterm session
+      #   if: ${{ always() }}
+      #   uses: lhotari/action-upterm@v1
